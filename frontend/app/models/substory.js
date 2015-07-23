@@ -10,7 +10,7 @@ export default Model.extend(ModelCurrentUser, {
   newStatus: DS.attr('string'),
   episodeNumber: DS.attr('number'),
   reply: DS.attr('string'),
-  user: DS.belongsTo('user'),
+  user: DS.belongsTo('user', { async: false }),
   storyId: DS.attr('number'),
 
   // Using a computed property over a relationship here as

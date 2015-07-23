@@ -3,7 +3,7 @@ import wilsonScore from "../utils/wilson-score";
 
 export default DS.Model.extend({
   summary: DS.attr('string'),
-  user: DS.belongsTo('user'),
+  user: DS.belongsTo('user', { async: false }),
   anime: DS.belongsTo('anime', { async: true }),
   content: DS.attr('string'),
   formattedContent: DS.attr('string'),

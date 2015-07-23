@@ -10,7 +10,7 @@ export default DS.Model.extend(ModelTruncatedDetails, {
   coverImageUrl: DS.attr('string'),
   avatarUrl: DS.attr('string'),
   memberCount: DS.attr('number'),
-  currentMember: DS.belongsTo('group-member'),
+  currentMember: DS.belongsTo('group-member', { async: false }),
 
   aboutDisplay: Ember.computed.any('aboutFormatted', 'about'),
   coverImageStyle: function() {

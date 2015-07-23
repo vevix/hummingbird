@@ -16,7 +16,7 @@ export default User.extend({
   hasFacebook: DS.attr('boolean'),
   confirmed: DS.attr('boolean'),
   proExpiresAt: DS.attr('date'),
-  proMembershipPlan: DS.belongsTo('pro-membership-plan'),
+  proMembershipPlan: DS.belongsTo('pro-membership-plan', { async: false }),
 
   isImportErrored: Ember.computed.equal('importStatus', 'error'),
   isImportOngoing: function() {

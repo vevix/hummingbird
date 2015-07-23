@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import Ember from 'ember';
 
 export default DS.Model.extend({
-  user: DS.belongsTo('user'),
+  user: DS.belongsTo('user', { async: false }),
   rank: DS.attr('string'),
   pending: DS.attr('boolean'),
   groupId: DS.attr('string'),

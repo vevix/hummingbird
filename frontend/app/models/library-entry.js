@@ -2,7 +2,7 @@ import Em from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  anime: DS.belongsTo('anime'),
+  anime: DS.belongsTo('anime', { async: false }),
   status: DS.attr('string'),
   isFavorite: DS.attr('boolean'),
   rating: DS.attr('number'),

@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
-  creator: DS.belongsTo('user'),
+  creator: DS.belongsTo('user', { async: false }),
   key: DS.attr('string'),
   secret: DS.attr('string'),
   homepage: DS.attr('string'),

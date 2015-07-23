@@ -5,18 +5,18 @@ import ModelCurrentUser from '../mixins/model-current-user';
 
 export default Model.extend(ModelCurrentUser, {
   type: DS.attr('string'),
-  user: DS.belongsTo('user'),
-  poster: DS.belongsTo('user'),
-  group: DS.belongsTo('group'),
+  user: DS.belongsTo('user', { async: false }),
+  poster: DS.belongsTo('user', { async: false }),
+  group: DS.belongsTo('group', { async: false }),
   createdAt: DS.attr('date'),
   comment: DS.attr('string'),
-  media: DS.belongsTo('media', { polymorphic: true }),
-  substories: DS.hasMany('substory'),
+  media: DS.belongsTo('media', { polymorphic: true, async: false }),
+  substories: DS.hasMany('substory', { async: false }),
   substoryCount: DS.attr('number'),
   totalVotes: DS.attr('number'),
   isLiked: DS.attr('boolean'),
   adult: DS.attr('boolean'),
-  recentLikers: DS.hasMany('user'),
+  recentLikers: DS.hasMany('user', { async: false }),
 
   omittedSubstoryCount: function(){
     return this.get('substoryCount') - 2;

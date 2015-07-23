@@ -5,5 +5,5 @@ export default DS.Model.extend({
   animeWatched: DS.attr('number'),
   topGenres: DS.attr('array'),
 
-  favorites: DS.hasMany('favorite')
+  favorites: DS.hasMany('favorite', { async: false })
 });

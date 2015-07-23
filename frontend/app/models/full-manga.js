@@ -6,6 +6,6 @@ export default Manga.extend({
   communityRatings: DS.attr('array'),
   coverImage: DS.attr('string'),
   coverImageTopOffset: DS.attr('number'),
-  featuredCastings: DS.hasMany('casting'),
+  featuredCastings: DS.hasMany('casting', { async: false }),
   pendingEdits: DS.attr('number')
 });

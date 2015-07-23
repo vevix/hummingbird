@@ -1,9 +1,9 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  user: DS.belongsTo('user'),
-  anime: DS.belongsTo('full-anime'),
-  manga: DS.belongsTo('full-manga'),
+  user: DS.belongsTo('user', { async: false }),
+  anime: DS.belongsTo('full-anime', { async: false }),
+  manga: DS.belongsTo('full-manga', { async: false }),
 
   objectType: DS.attr('string'),
   object: DS.attr(),

@@ -2,7 +2,7 @@ import Em from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  source: DS.belongsTo('model', {polymorphic: true}),
+  source: DS.belongsTo('model', { polymorphic: true, async: false }),
   createdAt: DS.attr('date'),
   notificationType: DS.attr('string'),
   seen: DS.attr('boolean'),

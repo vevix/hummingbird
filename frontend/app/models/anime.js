@@ -19,7 +19,7 @@ export default Media.extend(ModelCurrentUser, {
   startedAiringDateKnown: DS.attr('boolean'),
   finishedAiring: DS.attr('date'),
   genres: DS.attr('array'),
-  libraryEntry: DS.belongsTo('library-entry'),
+  libraryEntry: DS.belongsTo('library-entry', { async: false }),
 
   nsfw: function() {
     return this.get('ageRating') === "R18+" || this.get('ageRating') === "R17+";
