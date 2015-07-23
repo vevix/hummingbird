@@ -37,7 +37,7 @@ export default Ember.Route.extend({
   actions: {
     loadFullCast: function() {
       var self = this;
-      this.store.find('casting', {anime_id: this.currentModel.get('id')}).then(function(castings) {
+      this.store.query('casting', {anime_id: this.currentModel.get('id')}).then(function(castings) {
         self.controller.set('fullCast', castings);
       });
     },

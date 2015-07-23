@@ -8,7 +8,7 @@ export default Ember.Route.extend(Paginated, {
   preloadObject: "version",
 
   fetchPage: function(page) {
-    return this.store.find('version', {
+    return this.store.query('version', {
       state: 'pending',
       page: page
     });

@@ -15,7 +15,7 @@ export default Ember.Route.extend(Paginated, {
       story = JSON.parse(story);
       self.store.pushPayload(story);
       if (!self.get('controller.newStories').find(function(oldStory) { return parseInt(oldStory.get('id')) === story.story.id; })) {
-        self.get('controller.newStories').pushObject(self.store.find('story', story.story.id));
+        self.get('controller.newStories').pushObject(self.store.findRecord('story', story.story.id));
       }
     });
   },
@@ -25,7 +25,7 @@ export default Ember.Route.extend(Paginated, {
   },
 
   fetchPage: function(page) {
-    return this.store.find('story', {
+    return this.store.query('story', {
       news_feed: true,
       page: page
     });
@@ -33,8 +33,8 @@ export default Ember.Route.extend(Paginated, {
 
   setupController: function(controller, model) {
     controller.setProperties({
-      'userInfo': this.store.find('user-info', this.get('currentUser.id')),
-      'trendingGroups': this.store.find('group', { trending: true, limit: 3 }),
+      'userInfo': this.store.findRecord('user-info', this.get('currentUser.id')),
+      'trendingGroups': this.store.query('group', { trending: true, limit: 3 }),
       'breakCounter': moment.unix(parseInt(window.genericPreload.break_counter)).fromNow().replace('ago', '')
     });
     setTitle("Dashboard");

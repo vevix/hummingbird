@@ -4,7 +4,7 @@ import setTitle from '../../utils/set-title';
 export default Ember.Route.extend({
   model: function() {
     var user_id = this.modelFor('user').get('id');
-    return this.store.find('library-entry', {
+    return this.store.query('library-entry', {
       user_id: user_id,
       status: "Currently Watching"
     });
@@ -14,7 +14,7 @@ export default Ember.Route.extend({
     var user_id = this.modelFor('user').get('id');
     controller.set('model', model);
     controller.set('loadingRemaining', true);
-    return this.store.find('library-entry', {
+    return this.store.query('library-entry', {
       user_id: user_id
     }).then(function(entries) {
       controller.get('content').addObjects(entries.filter(function(l) {

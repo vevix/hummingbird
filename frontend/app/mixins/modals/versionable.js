@@ -3,7 +3,7 @@ import ajax from 'ic-ajax';
 /* global Messenger */
 
 export default Ember.Mixin.create({
-  canSave: Ember.computed.not('model.isDirty'),
+  canSave: Ember.computed.not('model.hasDirtyAttributes'),
   comment: null,
 
   // Ember controller is a singleton, and we don't have a route associated
@@ -36,7 +36,7 @@ export default Ember.Mixin.create({
         progressMessage: 'Contacting server...',
         successMessage: function() {
           // reset data back to its 'real' state rather than its dirty state.
-          this.get('model').rollback();
+          this.get('model').rollbackAttributes();
           this.resetModal();
           return "Thanks! You'll be notified when your edit has been reviewed.";
         }.bind(this)

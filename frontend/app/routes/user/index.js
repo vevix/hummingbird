@@ -4,7 +4,7 @@ import setTitle from '../../utils/set-title';
 
 export default Ember.Route.extend(Paginated, {
   fetchPage: function(page) {
-    return this.store.find('story', {
+    return this.store.query('story', {
       user_id: this.modelFor('user').get('id'),
       page: page
     });
@@ -12,7 +12,7 @@ export default Ember.Route.extend(Paginated, {
 
   setupController: function(controller, model) {
     var thisUserId = this.modelFor('user').get('id');
-    controller.set('userInfo', this.store.find('user-info', thisUserId));
+    controller.set('userInfo', this.store.findRecord('user-info', thisUserId));
 
     this.setCanLoadMore(true);
     controller.set('canLoadMore', true);

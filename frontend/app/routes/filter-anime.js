@@ -7,7 +7,7 @@ export default Ember.Route.extend({
     // and fval (the query value). These values will be sent to the server to
     // request the respective search results.
 
-    this.store.find('genre').then(function(genres){
+    this.store.findAll('genre').then(function(genres){
       controller.set('filterGenres', genres.map(function(genre) {
         return Ember.Object.create({
           model: genre,

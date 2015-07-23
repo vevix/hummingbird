@@ -4,7 +4,7 @@ import setTitle from '../../utils/set-title';
 
 export default Ember.Route.extend(Paginated, {
   fetchPage: function(page) {
-    return this.store.find('story', {
+    return this.store.query('story', {
       group_id: this.modelFor('group').get('id'),
       page: page
     });
@@ -13,11 +13,11 @@ export default Ember.Route.extend(Paginated, {
   setupController: function(controller, model) {
     setTitle(controller.get('group.name'));
 
-    var groups = this.store.find('group', {
+    var groups = this.store.query('group', {
       trending: true,
       limit: 3
     });
-    var users = this.store.find('group-member', {
+    var users = this.store.query('group-member', {
       group_id: this.modelFor('group').get('id'),
       recent: true
     });

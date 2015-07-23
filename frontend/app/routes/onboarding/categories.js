@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     if (controller.get('genres') !== undefined) { return; }
 
     controller.set('loading', true);
-    this.store.find('genre').then(function(genres) {
+    this.store.findAll('genre').then(function(genres) {
       controller.set('genres', genres.map(function(genre) {
         return Ember.Object.create({
           model: genre,

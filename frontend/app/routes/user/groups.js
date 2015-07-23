@@ -4,7 +4,7 @@ import setTitle from '../../utils/set-title';
 
 export default Ember.Route.extend(Paginated, {
   fetchPage: function(page) {
-    return this.store.find('group', {
+    return this.store.query('group', {
       user_id: this.modelFor('user').get('id'),
       page: page
     });

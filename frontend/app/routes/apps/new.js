@@ -16,7 +16,7 @@ export default Ember.Route.extend({
   },
 
   model: function() {
-    let currentUserUser = this.store.find('user', this.get('currentUser.id'));
+    let currentUserUser = this.store.findRecord('user', this.get('currentUser.id'));
     return this.store.createRecord('app', {
       // HACK: fixes `undefined` being logged to console (bug in EV?)
       name: '',

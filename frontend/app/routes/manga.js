@@ -2,6 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    return this.store.find('full-manga', params.id);
+    return this.store.findRecord('full-manga', params.id);
   }
 });

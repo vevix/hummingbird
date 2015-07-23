@@ -39,17 +39,27 @@ export default User.extend({
       processData: false,
       type: 'POST'
     }).then(() => {
-      this.store.push('current-user', {
-        id: this.get('id'),
-        importStatus: 'queued',
-        importFrom: service
+      this.store.push({
+        data: {
+          id: this.get('id'),
+          type: 'current-user',
+          attributes: {
+            importStatus: 'queued',
+            importFrom: service
+          }
+        }
       });
     }, (err) => {
       try {
-        this.store.push('current-user', {
-          id: this.get('id'),
-          importStatus: 'error',
-          importError: err.jqXHR.responseJSON.error
+        this.store.push({
+          data: {
+            id: this.get('id'),
+            type: 'current-user',
+            attributes: {
+              importStatus: 'error',
+              importError: err.jqXHR.responseJSON.error
+            }
+          }
         });
       } catch (e) {
         alert("There was a problem importing your list. Send an email to josh@hummingbird.me with the file you're trying to import and we'll see what we can do.");

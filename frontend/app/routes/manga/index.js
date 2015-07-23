@@ -33,7 +33,7 @@ export default Ember.Route.extend({
   actions: {
     loadFullCharacters: function() {
       var manga_id = this.currentModel.get('id');
-      this.store.find('casting', { manga_id }).then((castings) => {
+      this.store.query('casting', { manga_id: manga_id }).then((castings) => {
         this.controller.set('fullCharacters', castings);
       });
     },

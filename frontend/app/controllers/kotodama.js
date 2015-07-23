@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   showNonMal: false,
 
   usersToFollow: function() {
-    return this.store.find('user', {
+    return this.store.query('user', {
       to_follow: true
     });
   }.property('userToFollowSubmit'),

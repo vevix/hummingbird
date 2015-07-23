@@ -2,6 +2,7 @@ import Ember from 'ember';
 import PreloadStore from '../utils/preload-store';
 
 export default Ember.Component.extend({
+  store: Ember.inject.service(),
   loading: true,
   page: 1,
   libraryEntries: [],
@@ -11,14 +12,14 @@ export default Ember.Component.extend({
   }.property('loading', 'libraryEntries.length'),
 
   fetchPage: function(page) {
-    var store = this.get('targetObject.store'),
+    var store = this.get('store'),
         self = this;
 
     this.set('page', page);
     this.set('loading', true);
 
     PreloadStore.popEmberData("recent_library_entries", "library_entries", "libraryEntry", store, function() {
-      return store.find('libraryEntry', {recent: true, page: page});
+      return store.query('libraryEntry', {recent: true, page: page});
     }).then(function(entries) {
       self.set('libraryEntries', entries);
       self.set('loading', false);

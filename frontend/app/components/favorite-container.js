@@ -4,7 +4,7 @@ import ajax from 'ic-ajax';
 var FAVS_PER_PAGE = 6;
 
 export default Ember.Component.extend({
-  store: Ember.computed.alias('targetObject.store'),
+  store: Ember.inject.service(),
 
   isAnimeContainer: Ember.computed.equal('containerType', 'anime'),
   isMangaContainer: Ember.computed.equal('containerType', 'manga'),
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
         dragEnd: function() {
           self.$('.media-grid-dragsort').children('li').each(function(i, fav) {
             var id = self.$(fav).attr('data-id');
-            self.get('targetObject.store').find('favorite', id).then(function(item) {
+            self.get('store').findRecord('favorite', id).then(function(item) {
               item.set('favRank', i);
             });
           });
@@ -70,7 +70,7 @@ export default Ember.Component.extend({
 
   actions: {
     deleteFavorite: function(fav) {
-      this.get('targetObject.store').find('favorite', fav.id).then(function(item) {
+      this.get('store').findRecord('favorite', fav.id).then(function(item) {
         item.destroyRecord();
       });
     },
@@ -88,29 +88,25 @@ export default Ember.Component.extend({
 
     saveFavoritePositions: function () {
       this.set('isEditing', false);
-      this.get('targetObject.store').filter('favorite', function(fav) {
-        return fav.get('isDirty') === true;
-      }).then(function(updatedFavs) {
-        if(updatedFavs.get('length') === 0) {
-          return;
-        }
+      var updatedFavs = this.get('store').peekAll('favorite').filterBy('hasDirtyAttributes');
+      if (updatedFavs.get('length') === 0) {
+        return;
+      }
 
-        var postData = updatedFavs.map(function(fav) {
-          return {
-            id: fav.get('id'),
-            rank: fav.get('favRank')
-          };
-        });
+      var postData = updatedFavs.map(function(fav) {
+        return {
+          id: fav.get('id'),
+          rank: fav.get('favRank')
+        };
+      });
 
-        return ajax({
-          type: 'POST',
-          url: "/favorites/update_all",
-          data: { favorites: JSON.stringify(postData) },
-          dataType: 'json'
-        }).then(Ember.K, function() {
-          alert("Something went wrong.");
-        });
-
+      return ajax({
+        type: 'POST',
+        url: "/favorites/update_all",
+        data: { favorites: JSON.stringify(postData) },
+        dataType: 'json'
+      }).then(Ember.K, function() {
+        alert("Something went wrong.");
       });
     },
 

@@ -54,7 +54,7 @@ export default Ember.Controller.extend({
       }
 
       var self = this;
-      this.store.find('user', this.get('currentUser.id')).then(function(user) {
+      this.store.findRecord('user', this.get('currentUser.id')).then(function(user) {
         var reply = self.store.createRecord('substory', {
           storyId: self.get('model.id'),
           user: user,
@@ -74,7 +74,7 @@ export default Ember.Controller.extend({
       if (!this.get('loadedAll')) {
         if (!this.get('loadingAll')) {
           // Load all substories for this story.
-          this.store.find('substory', {story_id: this.get('model.id')}).then(function(substories) {
+          this.store.query('substory', {story_id: this.get('model.id')}).then(function(substories) {
             self.set('allSubstories', substories);
             self.set('loadingAll', false);
           });

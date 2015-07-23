@@ -8,7 +8,7 @@ export default Ember.Route.extend(Paginated, {
   },
 
   fetchPage: function(page) {
-    return this.store.find('group', {
+    return this.store.query('group', {
       trending: true,
       page: page
     });
@@ -20,7 +20,7 @@ export default Ember.Route.extend(Paginated, {
     // only execute query if there is actually a user
     let userGroups = null;
     if (controller.get('currentUser.isSignedIn')) {
-      userGroups = this.store.find('group', {
+      userGroups = this.store.query('group', {
         user_id: controller.get('currentUser.id'),
         limit: 6
       });
@@ -28,7 +28,7 @@ export default Ember.Route.extend(Paginated, {
 
     controller.setProperties({
       'userGroups': userGroups,
-      'recentGroups': this.store.find('group', { limit: 6 }),
+      'recentGroups': this.store.query('group', { limit: 6 }),
       'model': model
     });
 

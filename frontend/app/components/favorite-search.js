@@ -2,6 +2,7 @@ import Ember from 'ember';
 /* global Bloodhound */
 
 export default Ember.Component.extend({
+  store: Ember.inject.service(),
   query: "",
   searchResults: [],
 
@@ -32,7 +33,7 @@ export default Ember.Component.extend({
 
       var isInFavs = favs.contains(item.link);
       var isTypeOk = ( item.type === self.get('type') );
-      
+
       return ( !isInFavs && isTypeOk );
     });
   }.property('searchResults.@each'),
@@ -53,17 +54,17 @@ export default Ember.Component.extend({
   actions: {
     addMediaToFavorites: function(media){
       var cuser = this.get('currentUser'),
-          store = this.get('targetObject.targetObject.store'),
+          store = this.get('store'),
           self = this;
 
       var newFav = store.createRecord('favorite', {
         'favRank': 9999
       });
 
-      store.find('user', cuser.get('id')).then(function(user){
+      store.findRecord('user', cuser.get('id')).then(function(user){
         newFav.set('user', user);
 
-        store.find(media.type, media.link).then(function(item){
+        store.findRecord(media.type, media.link).then(function(item){
           newFav.set('item', item);
           newFav.save();
           self.sendAction('action', newFav);

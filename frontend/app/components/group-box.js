@@ -2,6 +2,7 @@ import Ember from 'ember';
 /* global Messenger */
 
 export default Ember.Component.extend({
+  store: Ember.inject.service(),
   userIsMemberOfGroup: Ember.computed.notEmpty('group.currentMember'),
 
   userMembershipIsPending: function(){
@@ -11,7 +12,7 @@ export default Ember.Component.extend({
 
   actions: {
     joinGroup: function(){
-      var member = this.get('targetObject.store').createRecord('group-member', {
+      var member = this.get('store').createRecord('group-member', {
         groupId: this.get('group.id'),
         user: this.get('currentUser.content.content'),
         pending: true

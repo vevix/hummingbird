@@ -3,7 +3,7 @@ import setTitle from '../../utils/set-title';
 
 export default Ember.Route.extend({
   model: function() {
-    return this.store.find('app', {creator: this.get('currentUser.id')});
+    return this.store.query('app', {creator: this.get('currentUser.id')});
   },
 
   afterModel: function() {

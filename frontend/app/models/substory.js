@@ -17,7 +17,7 @@ export default Model.extend(ModelCurrentUser, {
   // we only serialize 2 substories with a parent story. This method
   // allows us to link a substory to a story without any issues.
   story: function() {
-    return this.store.find('story', this.get('storyId'));
+    return this.store.findRecord('story', this.get('storyId'));
   }.property('storyId'),
 
   html: function() {

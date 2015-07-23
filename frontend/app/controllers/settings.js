@@ -79,10 +79,10 @@ export default Ember.Controller.extend({
   }.property('currentUser.newPassword', 'passwordProblems'),
 
   submitDisabled: function() {
-    return !this.get('currentUser.isDirty') ||
+    return !this.get('currentUser.hasDirtyAttributes') ||
            !this.get('passwordValid') ||
            !this.get('usernameValid');
-  }.property('currentUser.isDirty', 'passwordValid', 'usernameValid'),
+  }.property('currentUser.hasDirtyAttributes', 'passwordValid', 'usernameValid'),
 
   actions: {
     save: function() {
@@ -98,7 +98,7 @@ export default Ember.Controller.extend({
       });
     },
     clean: function() {
-      this.get('currentUser.content.content').rollback();
+      this.get('currentUser.content.content').rollbackAttributes();
     },
     dropboxDisconnect: function() {
       var self = this;
@@ -106,9 +106,14 @@ export default Ember.Controller.extend({
         type: 'DELETE',
         dataType: 'json'
       }).then(function() {
-        self.store.push('current-user', {
-          id: self.get('currentUser.id'),
-          hasDropbox: false
+        self.store.push({
+          data: {
+            id: self.get('currentUser.id'),
+            type: 'current-user',
+            attributes: {
+              hasDropbox: false
+            }
+          }
         });
       });
     },

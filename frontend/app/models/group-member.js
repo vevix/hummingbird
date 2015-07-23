@@ -15,7 +15,7 @@ export default DS.Model.extend({
   // relationship only serializes a subset of `group-members`,
   // rather than all and ember will destroy the relationship.
   group: function() {
-    return this.store.find('group', this.get('groupId'));
+    return this.store.findRecord('group', this.get('groupId'));
   }.property('groupId'),
 
   isAdmin: Ember.computed.equal('rank', 'admin'),

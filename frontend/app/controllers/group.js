@@ -50,7 +50,7 @@ export default Ember.Controller.extend(HasCoverUpload, {
           return 'You left ' + this.get('model.name') + '.';
         },
         errorMessage: (type, xhr) => {
-          member.rollback();
+          member.rollbackAttributes();
           this.set('loading', false);
           if (xhr && xhr.responseJSON && xhr.responseJSON.error) {
             return xhr.responseJSON.error + '.';
@@ -73,7 +73,7 @@ export default Ember.Controller.extend(HasCoverUpload, {
           return 'You deleted ' + this.get('model.name') + '.';
         },
         errorMessage: (type, xhr) => {
-          group.rollback();
+          group.rollbackAttributes();
           if (xhr && xhr.responseJSON && xhr.responseJSON.error) {
             return xhr.responseJSON.error + '.';
           }

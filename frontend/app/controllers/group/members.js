@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   // update the ranks of members when it is changed in the select view
   // this kinda sucks...
   updateRank: function() {
-    this.get('model').filterBy('isDirty', true)
+    this.get('model').filterBy('hasDirtyAttributes', true)
       .filterBy('dirtyType', 'updated')
       .forEach(function(member) {
         Messenger().expectPromise(function() {
@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
             return 'Updated ' + member.get('user.username') + '\'s rank.';
           },
           errorMessage: function(type, xhr) {
-            member.rollback();
+            member.rollbackAttributes();
             if (xhr && xhr.responseJSON && xhr.responseJSON.error) {
               return xhr.responseJSON.error + '.';
             }
@@ -67,7 +67,7 @@ export default Ember.Controller.extend({
           return 'Kicked ' + member.get('user.username') + '.';
         },
         errorMessage: function(type, xhr) {
-          member.rollback();
+          member.rollbackAttributes();
           if (xhr && xhr.responseJSON && xhr.responseJSON.error) {
             return xhr.responseJSON.error + '.';
           }

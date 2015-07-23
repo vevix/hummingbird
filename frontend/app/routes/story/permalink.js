@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   controllerName: "story",
 
   model: function(params) {
-    return this.store.find('story', params.id);
+    return this.store.findRecord('story', params.id);
   },
 
   setupController: function(controller, model) {
