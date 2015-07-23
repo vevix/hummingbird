@@ -9,8 +9,8 @@ moduleForModel('full-manga', 'FullManga', {
           'model:manga-library-entry']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(!!model);
+  assert.ok(!!model);
 });

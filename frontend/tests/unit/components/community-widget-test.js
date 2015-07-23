@@ -8,8 +8,8 @@ moduleForComponent('community-widget', 'CommunityWidgetComponent', {
   // needs: ['component:foo', 'helper:bar']
 });
 
-test('it renders', function() {
-  ok(true); /* Need to mock the response
+test('it renders', function(assert) {
+  assert.ok(true); /* Need to mock the response
 
   expect(2);
 

@@ -8,8 +8,8 @@ moduleForModel('user-info', 'UserInfo', {
   needs: ['model:favorite', 'model:user', 'model:media']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(!!model);
+  assert.ok(!!model);
 });

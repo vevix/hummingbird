@@ -24,23 +24,23 @@ moduleFor('controller:story', {
 });
 
 // Replace this with your real tests.
-test('it exists', function() {
+test('it exists', function(assert) {
   var controller = this.subject();
-  ok(controller);
+  assert.ok(controller);
 });
 
-test('is on group page', function() {
-  expect(1);
+test('is on group page', function(assert) {
+  assert.expect(1);
   var controller = this.subject();
   visit('/groups/gumi-appreciation-group').then(function() {
-    equal(controller.get('isOnGroupPage'), true);
+    assert.equal(controller.get('isOnGroupPage'), true);
   });
 });
 
-test('is not on group page', function() {
-  expect(1);
+test('is not on group page', function(assert) {
+  assert.expect(1);
   var controller = this.subject();
   visit('/users/josh').then(function() {
-    equal(controller.get('isOnGroupPage'), false);
+    assert.equal(controller.get('isOnGroupPage'), false);
   });
 });

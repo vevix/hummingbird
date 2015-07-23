@@ -8,8 +8,8 @@ moduleForModel('episode', 'Episode', {
   needs: ['model:anime', 'model:library-entry', 'model:video']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(!!model);
+  assert.ok(!!model);
 });

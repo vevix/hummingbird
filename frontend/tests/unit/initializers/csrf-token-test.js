@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import {module, test} from 'qunit';
 import { initialize } from 'frontend/initializers/csrf-token';
 
 var application, registry;
 
 module('CsrfTokenInitializer', {
-  setup: function() {
+  beforeEach: function() {
     Ember.run(function() {
       application = Ember.Application.create();
       registry = application.registry;

@@ -8,8 +8,8 @@ moduleForComponent('quick-update', 'QuickUpdateComponent', {
   // needs: ['component:foo', 'helper:bar']
 });
 
-test('it renders', function() {
-  ok(true);
+test('it renders', function(assert) {
+  assert.ok(true);
   /* expect(2);
 
   // creates the component instance

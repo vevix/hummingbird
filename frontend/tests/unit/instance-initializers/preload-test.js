@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import {module, test} from 'qunit';
 import { initialize } from 'frontend/instance-initializers/preload';
 
 var appInstance;
 
 module('PreloadInitializer', {
-  setup: function() {
+  beforeEach: function() {
     Ember.run(function() {
       var application = Ember.Application.create();
       appInstance = application.__deprecatedInstance__;

@@ -1,10 +1,11 @@
 import Ember from 'ember';
+import {module, test} from 'qunit';
 import { initialize } from 'frontend/initializers/message-bus';
 
 var application, registry;
 
 module('MessageBusInitializer', {
-  setup: function() {
+  beforeEach: function() {
     Ember.run(function() {
       application = Ember.Application.create();
       registry = application.registry;

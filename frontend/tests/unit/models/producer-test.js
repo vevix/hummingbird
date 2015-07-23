@@ -8,8 +8,8 @@ moduleForModel('producer', 'Producer', {
   needs: []
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(!!model);
+  assert.ok(!!model);
 });

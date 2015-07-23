@@ -10,8 +10,8 @@ moduleForModel('full-anime', 'FullAnime', {
           'model:anime', 'model:video', 'model:user', 'model:library-entry']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(!!model);
+  assert.ok(!!model);
 });

@@ -8,18 +8,18 @@ moduleFor('transform:array', 'ArrayTransform', {
   // needs: ['serializer:foo']
 });
 
-test("#serialize", function() {
+test("#serialize", function(assert) {
   var transform = this.subject();
 
-  deepEqual(transform.serialize(null), []);
-  deepEqual(transform.serialize(undefined), []);
-  deepEqual(transform.serialize([1,2,3]), [1,2,3]);
+  assert.deepEqual(transform.serialize(null), []);
+  assert.deepEqual(transform.serialize(undefined), []);
+  assert.deepEqual(transform.serialize([1,2,3]), [1,2,3]);
 });
 
-test("#deserialize", function() {
+test("#deserialize", function(assert) {
   var transform = this.subject();
 
-  equal(transform.deserialize(null), null);
-  equal(transform.deserialize(undefined), undefined);
-  deepEqual(transform.deserialize([1,2,3]), [1,2,3]);
+  assert.equal(transform.deserialize(null), null);
+  assert.equal(transform.deserialize(undefined), undefined);
+  assert.deepEqual(transform.deserialize([1,2,3]), [1,2,3]);
 });

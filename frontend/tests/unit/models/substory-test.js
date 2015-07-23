@@ -8,8 +8,8 @@ moduleForModel('substory', 'Substory', {
   needs: ['model:user', 'model:group', 'model:story', 'model:media']
 });
 
-test('it exists', function() {
+test('it exists', function(assert) {
   var model = this.subject();
   // var store = this.store();
-  ok(!!model);
+  assert.ok(!!model);
 });
