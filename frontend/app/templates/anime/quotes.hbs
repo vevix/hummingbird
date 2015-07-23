@@ -54,8 +54,8 @@
               {{/unless}}
             </div>
           </div>
-          <button class="btn status-button pull-right disabled"
-                  {{bind-attr class="isFormCorrect:enabled:disabled"}} {{action 'submitQuote'}}>Submit</button>
+          <button class="btn status-button pull-right disabled {{if isFormCorrect 'enabled' 'disabled'}}"
+            {{action 'submitQuote'}}>Submit</button>
         </div>
       {{else}}
         <button class="btn status-button pull-right" {{action 'toggleQuoteCreate'}}>Submit new quote</button>
