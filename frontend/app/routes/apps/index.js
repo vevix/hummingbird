@@ -72,7 +72,7 @@ export default Ember.Route.extend({
         ],
         "form": "Mobile",
         "platform": "Windows Phone",
-        "screenshots": [sb+"anitro-mobile/anitro-mobile-1.jpg", sb+"anitro-mobile/anitro-mobile-1.jpg"],
+        "screenshots": [sb+"anitro-mobile/anitro-mobile-1.jpg", sb+"anitro-mobile/anitro-mobile-2.jpg"],
         "desc": "Anitro is an application for Windows Phone 8.1 that allows you to View and Manage your entire profile.",
         "links": [
           { "name": "Discuss", "link": "https://forums.hummingbird.me/t/anitro-windows-8-1-windows-phone-8-1/3824" },
