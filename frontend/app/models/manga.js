@@ -13,7 +13,7 @@ export default Media.extend({
   volumeCount: DS.attr("number"),
   chapterCount: DS.attr("number"),
   genres: DS.attr("array"),
-  mangaLibraryEntry: DS.belongsTo("manga-library-entry", { async: false }),
+  mangaLibraryEntry: DS.belongsTo('manga-library-entry', { async: false }),
   libraryEntry: Ember.computed.alias('mangaLibraryEntry'),
   displayTitle: Ember.computed.alias('romajiTitle'),
   lowercaseDisplayTitle: (function() {

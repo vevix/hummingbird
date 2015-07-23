@@ -39,14 +39,14 @@ export default User.extend({
       processData: false,
       type: 'POST'
     }).then(() => {
-      this.store.push('currentUser', {
+      this.store.push('current-user', {
         id: this.get('id'),
         importStatus: 'queued',
         importFrom: service
       });
     }, (err) => {
       try {
-        this.store.push('currentUser', {
+        this.store.push('current-user', {
           id: this.get('id'),
           importStatus: 'error',
           importError: err.jqXHR.responseJSON.error

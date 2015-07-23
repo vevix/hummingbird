@@ -7,8 +7,8 @@ export default Ember.Route.extend({
     var promises = {
       anime: this.store.find('anime', { 'sort_by': 'bayesian_rating', 'sort_reverse': true }),
       manga: this.store.find('manga', { 'sort_by': 'created_at', 'sort_reverse': true }),
-      libraryEntries: this.store.find('library_entry', { 'user_id': this.get('currentUser.id') }),
-      mangaLibraryEntries: this.store.find('manga_library_entry', { 'user_id': this.get('currentUser.id') })
+      libraryEntries: this.store.find('library-entry', { 'user_id': this.get('currentUser.id') }),
+      mangaLibraryEntries: this.store.find('manga-library-entry', { 'user_id': this.get('currentUser.id') })
     };
 
     Ember.RSVP.hash(promises).then(function(hash){

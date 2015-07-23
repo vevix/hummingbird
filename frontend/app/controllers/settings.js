@@ -106,7 +106,7 @@ export default Ember.Controller.extend({
         type: 'DELETE',
         dataType: 'json'
       }).then(function() {
-        self.store.push('currentUser', {
+        self.store.push('current-user', {
           id: self.get('currentUser.id'),
           hasDropbox: false
         });

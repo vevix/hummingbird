@@ -110,7 +110,7 @@ export default Ember.Controller.extend({
       // Anime and Manga library entries are using
       // different models in ember data!
       if(media.constructor.modelName === 'anime') {
-        libraryEntry = this.store.createRecord('LibraryEntry', {
+        libraryEntry = this.store.createRecord('library-entry', {
           anime: media,
           status: "Completed",
           isFavorite: false,
@@ -123,7 +123,7 @@ export default Ember.Controller.extend({
           fav_rank: 9999
         });
       } else {
-        libraryEntry = this.store.createRecord('MangaLibraryEntry', {
+        libraryEntry = this.store.createRecord('manga-library-entry', {
           manga: media,
           status: "Completed",
           isFavorite: false,

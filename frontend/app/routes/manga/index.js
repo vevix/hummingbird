@@ -65,7 +65,7 @@ export default Ember.Route.extend({
       if (this.controller.get('mangaLibraryEntryExists')) {
         mangaLibraryEntry.set('status', newStatus);
       } else {
-        mangaLibraryEntry = this.store.createRecord('mangaLibraryEntry', {
+        mangaLibraryEntry = this.store.createRecord('manga-library-entry', {
           status: newStatus,
           manga: this.currentModel
         });

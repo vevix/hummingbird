@@ -47,7 +47,7 @@ export default Ember.Route.extend({
       if (this.controller.get('libraryEntryExists')) {
         libraryEntry.set('status', newStatus);
       } else {
-        libraryEntry = this.store.createRecord('libraryEntry', {
+        libraryEntry = this.store.createRecord('library-entry', {
           status: newStatus,
           anime: this.currentModel
         });
