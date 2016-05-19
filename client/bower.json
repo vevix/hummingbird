@@ -11,5 +11,8 @@
     "font-awesome": "~4.4.0",
     "nouislider": "~8.2.1",
     "humanize-duration": "~3.4.0"
+  },
+  "resolutions": {
+    "jquery": "2.2.3"
   }
 }
