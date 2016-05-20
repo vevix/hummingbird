@@ -3,15 +3,17 @@
 # Build files
 docker-compose build
 # Install dependencies
-docker-compose run --entrypoint=bundle server install
-docker-compose run --entrypoint=npm client install
-docker-compose run --entrypoint=bower client install --allow-root
+docker-compose run -d --entrypoint=bundle server install
+docker-compose run -d --entrypoint=npm client install
+docker-compose run -d --entrypoint=bower client install --allow-root
 # Initialize database
-docker-compose run server rake db:setup
+docker-compose run -d server rake db:setup
 # Boot app
+# TODO: Runs prior to detached tasks above finishing
 docker-compose up -d
 
 # Get docker-machine ip if there is one
+# TODO: `localhost` on Mac, `docker` on Windows
 port="$(docker-compose port nginx 80 | cut -d: -f2)"
 [ -z "$DOCKER_MACHINE_NAME" ] && host='localhost' || host="$(docker-machine ip $DOCKER_MACHINE_NAME)"
 server="http://$host:$port"
