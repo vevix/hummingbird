@@ -1,6 +1,5 @@
 import Route from 'ember-route';
 import get from 'ember-metal/get';
-import set from 'ember-metal/set';
 import service from 'ember-service/inject';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
@@ -8,16 +7,9 @@ export default Route.extend(ApplicationRouteMixin, {
   currentSession: service(),
   i18n: service(),
   metrics: service(),
-  ajax: service(),
 
-  // If you are visiting the site while authenticated, lets grab your data
   beforeModel() {
-    const session = get(this, 'currentSession');
-    if (get(session, 'isAuthenticated')) {
-      // we return the promise here, as it will pause the transition until
-      // we have received the data
-      return this._getCurrentUser();
-    }
+    return this._getCurrentUser();
   },
 
   title(tokens) {
@@ -26,8 +18,8 @@ export default Route.extend(ApplicationRouteMixin, {
     // name from the `titles` table in translations.
     const hasTokens = tokens && tokens.length > 0;
     if (hasTokens === false) {
-      let title = get(this, 'i18n')
-        .t(`titles.${get(this, 'router.currentRouteName')}`) || undefined;
+      const currentRouteName = get(this, 'router.currentRouteName');
+      let title = get(this, 'i18n').t(`titles.${currentRouteName}`) || undefined;
       if (title && title.toString().includes('Missing translation')) {
         title = undefined;
       }
@@ -42,25 +34,20 @@ export default Route.extend(ApplicationRouteMixin, {
     this._super(...arguments);
   },
 
-  // By default, ESA reloads the browser to `baseURL`
-  // we don't want that, so just redirect to dashboard
-  sessionInvalidated() {
-    get(this, 'currentSession').clean();
-    this.transitionTo('dashboard');
-  },
-
+  /**
+   * Retreives the current user data from the API if we have a local session
+   * stored.
+   */
   _getCurrentUser() {
-    return get(this, 'ajax').request('/users?filter[self]=true')
-      .then((response) => {
-        const [data] = response.data;
-        const normalizedData = get(this, 'store').normalize('user', data);
-        const user = get(this, 'store').push(normalizedData);
-        const userId = get(user, 'id');
-        set(this, 'currentSession.userId', userId);
-
-        // identify with analytics
-        get(this, 'metrics').identify({ distinctId: userId });
-      })
-      .catch(() => get(this, 'currentSession').invalidate());
+    const isAuthenticated = get(this, 'currentSession.isAuthenticated');
+    if (isAuthenticated) {
+      return get(this, 'currentSession').getCurrentUser()
+        .then((user) => {
+          get(this, 'metrics').identify({ distinctId: get(user, 'id') });
+        })
+        .catch(() => {
+          get(this, 'currentSession').invalidate();
+        });
+    }
   }
 });

@@ -1,7 +1,8 @@
 <div class="site-header" class="top-bar" data-test-selector="site-header">
   <div class="top-bar-wrapper">
+    {{! Left Side }}
     <div class="top-bar-left">
-      <ul class="dropdown menu" data-dropdown-menu>
+      {{#zf-dropdown-menu}}
         <li>
           {{#link-to 'dashboard'}}
             <div class="logo"></div>
@@ -19,17 +20,18 @@
         <li class="primary-nav"><a href="#">{{t 'media.manga.name'}}</a></li>
         <li class="primary-nav"><a href="https://forums.hummingbird.me">{{t 'header.forums'}}</a></li>
         <li class="primary-nav"><a href="#">{{t 'header.downloads'}}</a></li>
-      </ul>
+      {{/zf-dropdown-menu}}
     </div>
+
+    {{! Right Side }}
     <div class="top-bar-right">
-      {{! TODO: Implement guest state }}
-      <ul class="dropdown menu" data-dropdown-menu>
-        <li>
-          <a href="#" class="circle-button">
-            {{fa-icon "search"}}
-          </a>
-        </li>
-        {{#if currentSession.isAuthenticated}}
+      {{#if currentSession.isAuthenticated}}
+        {{#zf-dropdown-menu}}
+          <li>
+            <a href="#" class="circle-button">
+              {{fa-icon "search"}}
+            </a>
+          </li>
           <li>
             <a href="#" class="circle-button">
               {{fa-icon "bell-o"}}
@@ -52,12 +54,19 @@
               </li>
             </ul>
           </li>
-        {{else}}
+        {{/zf-dropdown-menu}}
+      {{else}}
+        <ul class="menu">
+          <li>
+            <a href="#" class="circle-button">
+              {{fa-icon "search"}}
+            </a>
+          </li>
           <li>
             {{link-to (t 'links.auth.sign-in') 'sign-in'}}
           </li>
-        {{/if}}
-      </ul>
+        </ul>
+      {{/if}}
     </div>
   </div>
 </div>

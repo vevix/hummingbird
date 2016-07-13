@@ -18,9 +18,9 @@ export default Route.extend(UnauthenticatedRouteMixin, {
       const model = get(controller, 'model');
       return model.save()
         .then(() => {
-          const { name: identification, password } = getProperties(model, 'name', 'password');
+          const { name, password } = getProperties(model, 'name', 'password');
           get(this, 'currentSession')
-            .authenticateWithOAuth2(identification, password)
+            .authenticateWithOAuth2(name, password)
             .then(() => this.transitionTo('onboarding.start'))
             .catch((err) => set(controller, 'errorMessage', errorMessage(err)));
         })

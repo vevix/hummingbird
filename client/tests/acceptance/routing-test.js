@@ -19,6 +19,7 @@ test('visiting `/` works when unauthenticated', function(assert) {
 
 test('visiting /sign-in redirects to / when authenticated', function(assert) {
   assert.expect(1);
+  server.create('user');
   authenticateSession(this.application);
   visit('/sign-in');
   andThen(() => assert.equal(currentURL(), '/'));
@@ -33,6 +34,7 @@ test('visiting `/sign-in` works when unauthenticated', function(assert) {
 
 test('visiting `/sign-up` redirects to `/` when authenticated', function(assert) {
   assert.expect(1);
+  server.create('user');
   authenticateSession(this.application);
   visit('/sign-up');
   andThen(() => assert.equal(currentURL(), '/'));

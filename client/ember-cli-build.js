@@ -4,11 +4,11 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     storeConfigInMeta: false,
-    sassOptions: {
-      includePaths: ['bower_components/foundation-sites/scss']
-    },
     babel: {
       includePolyfill: true
+    },
+    'ember-cli-foundation-6-sass': {
+      'foundationJs': 'all'
     }
   });
 

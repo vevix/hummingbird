@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: service(),
 
   /**
-   * Redirect to `dashboard` if the user has already been onboarded.
+   * Redirect to `dashboard` if the user has already been thru this process.
    */
   redirect() {
     if (get(this, 'currentSession.account.onboarded')) {
