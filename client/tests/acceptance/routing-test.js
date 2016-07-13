@@ -17,7 +17,7 @@ test('visiting `/` works when unauthenticated', function(assert) {
   andThen(() => assert.equal(currentURL(), '/'));
 });
 
-test('visiting `/sign-in` redirects to `/` when authenticated', function(assert) {
+test('visiting /sign-in redirects to / when authenticated', function(assert) {
   assert.expect(1);
   authenticateSession(this.application);
   visit('/sign-in');
