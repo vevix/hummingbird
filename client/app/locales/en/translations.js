@@ -59,8 +59,8 @@ export default {
   library: {
     remove: 'Remove from Library',
     statuses: {
-      // jscs:disable
       anime: {
+        all: 'All',
         current: 'Currently Watching',
         planned: 'Plan To Watch',
         completed: 'Completed',
@@ -68,6 +68,7 @@ export default {
         dropped: 'Dropped'
       },
       manga: {
+        all: 'All',
         current: 'Currently Reading',
         planned: 'Plan To Read',
         completed: 'Completed',
@@ -75,13 +76,13 @@ export default {
         dropped: 'Dropped'
       },
       drama: {
+        all: 'All',
         current: 'Currently Watching',
         planned: 'Plan To Watch',
         completed: 'Completed',
         on_hold: 'On Hold',
         dropped: 'Dropped'
       }
-      // jscs:enable
     }
   },
   // Global header
@@ -146,10 +147,7 @@ export default {
       private: 'Private',
       rewatch: 'Rewatch',
       rewatched: 'Rewatched',
-      times: 'times',
-      section: {
-        all: 'All'
-      }
+      times: 'times'
     }
   },
   errors: {

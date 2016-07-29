@@ -10,8 +10,9 @@ export default JSONAPISerializer.extend({
     return camelize(key);
   },
 
-  // Serializes all attributes if the record is persistant (from the server)
-  // or only serializes changed attributes when the record is new (local only)
+  /**
+   * Serialize attributes if the record is not new or attribute is dirty.
+   */
   serializeAttribute(snapshot, json, key) {
     if (snapshot.record.isNew === false || key in snapshot.changedAttributes()) {
       return this._super(...arguments);

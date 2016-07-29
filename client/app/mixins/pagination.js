@@ -1,17 +1,15 @@
-import Component from 'ember-component';
+import Mixin from 'ember-metal/mixin';
 import get from 'ember-metal/get';
-import { setProperties } from 'ember-metal/set';
-import computed from 'ember-computed';
 import service from 'ember-service/inject';
-import InViewportMixin from 'ember-in-viewport';
+import computed from 'ember-computed';
 import { task } from 'ember-concurrency';
 
 /**
- * Scrolling pagination based on JSON-API's top level links object.
+ * Pagination based on JSON-API's top level links object.
  * Due to ember-data not having support for pagination yet, this requires a
  * hackish fix implemented in `client/initializers/store-links.js`
  */
-export default Component.extend(InViewportMixin, {
+export default Mixin.create({
   store: service(),
 
   /**
@@ -51,23 +49,6 @@ export default Component.extend(InViewportMixin, {
     const records = yield get(this, 'store').query(modelName, options);
     get(this, 'update')(records);
   }).drop(),
-
-  init() {
-    this._super(...arguments);
-    // Setup properties for `ember-in-viewport`
-    setProperties(this, {
-      viewportSpy: true,
-      viewportTolerance: {
-        top: 50,
-        bottom: 50
-      }
-    });
-  },
-
-  didEnterViewport() {
-    this._super(...arguments);
-    get(this, 'getNextData').perform();
-  },
 
   /**
    * Decodes and rebuilds the query params object from the URL passed.
