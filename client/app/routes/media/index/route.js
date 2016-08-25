@@ -8,8 +8,9 @@ import { isEmberArray } from 'ember-array/utils';
 import { task, timeout } from 'ember-concurrency';
 import jQuery from 'jquery';
 import QueryableMixin from 'client/mixins/routes/queryable';
+import PaginationMixin from 'client/mixins/routes/pagination';
 
-export default Route.extend(QueryableMixin, {
+export default Route.extend(QueryableMixin, PaginationMixin, {
   mediaType: undefined,
   mediaQueryParams: {
     averageRating: { replace: true },
@@ -94,14 +95,6 @@ export default Route.extend(QueryableMixin, {
   actions: {
     updateText(query) {
       get(this, 'setQuery').perform(query);
-    },
-
-    updateNextPage(records, links) {
-      const controller = this.controllerFor(get(this, 'routeName'));
-      const content = get(controller, 'model').toArray();
-      content.addObjects(records);
-      set(controller, 'model', content);
-      set(controller, 'model.links', links);
     },
 
     refresh() {
